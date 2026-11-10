@@ -1,0 +1,1373 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --night: #020817;
+  --deep-blue: #061633;
+  --blue: #258cff;
+  --cyan: #76e5ff;
+  --ice: #c9f5ff;
+  --white: #f1fbff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--night);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  overscroll-behavior: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* EL MAIN UNIVERSE */
+
+#universe {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 48%, #102c5b 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 85%, #071b3b 0%, transparent 45%),
+    linear-gradient(145deg, #01040d, #06132c 55%, #020817);
+}
+
+#starCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* EL INTRO SCREEN*/
+
+#intro {
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 44%, #12366c70, transparent 38%);
+}
+
+.intro-stars {
+  color: var(--cyan);
+  font-size: 24px;
+  letter-spacing: 12px;
+  margin-bottom: 28px;
+  text-shadow: 0 0 20px var(--cyan);
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  font-weight: 500;
+  color: #8bdfff;
+}
+
+#intro h1 {
+  margin-top: 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 9vw, 92px);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 0 0 30px #328aff50;
+}
+
+#intro h1 span {
+  color: var(--cyan);
+  text-shadow:
+    0 0 12px #55caff,
+    0 0 38px #147aff80;
+}
+
+.intro-heart {
+  margin: 25px auto 10px;
+  font-size: 76px;
+  color: #86eaff;
+  line-height: 1;
+  text-shadow:
+    0 0 12px #70dfff,
+    0 0 35px #248bff,
+    0 0 65px #1265ff;
+  animation: heartBeat 2.2s ease-in-out infinite;
+}
+
+.intro-subtitle {
+  margin-top: 15px;
+  color: #b7cde9;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+#enterButton,
+#memoriesButton,
+#backButton {
+  margin-top: 35px;
+  padding: 15px 27px;
+  color: var(--ice);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  background: #0a1b37a8;
+  border: 1px solid #72dfff90;
+  border-radius: 3px;
+  box-shadow:
+    0 0 18px #178aff25,
+    inset 0 0 18px #178aff12;
+  transition: 0.3s ease;
+}
+
+#enterButton span {
+  margin-left: 10px;
+}
+
+#enterButton:hover,
+#memoriesButton:hover,
+#backButton:hover {
+  background: #1261a85c;
+  border-color: var(--cyan);
+  box-shadow: 0 0 28px #35bfff55;
+  transform: translateY(-2px);
+}
+
+.intro-footer,
+.galaxy-footer {
+  position: absolute;
+  bottom: 25px;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: #6f91bd;
+}
+
+/* EL GALAXY SCREEN */
+
+#galaxyScreen {
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.galaxy-heading {
+  z-index: 2;
+  text-align: center;
+  margin-top: clamp(18px, 5vh, 48px);
+}
+
+.galaxy-heading h2 {
+  margin-top: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 400;
+  text-shadow: 0 0 20px #3caaff65;
+}
+
+.galaxy-heading h2 span {
+  font-size: 22px;
+}
+
+#galaxyStage {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  width: min(100vw, 850px);
+  height: min(68vh, 650px);
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+
+#heartCanvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  filter: drop-shadow(0 0 8px #52cfff);
+}
+
+#galaxyScreen #memoriesButton {
+  position: absolute;
+  bottom: 52px;
+  z-index: 3;
+  margin: 0;
+}
+
+#galaxyScreen .galaxy-footer {
+  bottom: 22px;
+}
+
+/* EL FLORES*/
+
+.flower {
+  position: absolute;
+  z-index: 2;
+  font-size: clamp(28px, 5vw, 48px);
+  filter:
+    drop-shadow(0 0 8px #53caff)
+    drop-shadow(0 0 18px #176dff80);
+  animation: flowerFloat 5s ease-in-out infinite;
+  user-select: none;
+}
+
+.flower-one {
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  animation-delay: -1s;
+}
+
+.flower-two {
+  right: 13%;
+  top: 30%;
+  animation-delay: -3s;
+}
+
+.flower-three {
+  left: 22%;
+  bottom: 20%;
+  animation-delay: -2s;
+}
+
+.flower-four {
+  right: 19%;
+  bottom: 18%;
+  animation-delay: -4s;
+}
+
+.flower-five {
+  left: 5%;
+  top: 55%;
+  font-size: 32px;
+  animation-delay: -2.5s;
+}
+
+.flower-six {
+  right: 6%;
+  top: 58%;
+  font-size: 33px;
+  animation-delay: -1.5s;
+}
+
+/* EL BLUE TULIP PICTURES */
+
+.flower img {
+  display: block;
+  width: 30%;
+  height: 20%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(80, 160, 255, 0.45));
+}
+
+#galaxyStage .flower-one {
+  left: 3% !important;
+  top: -5% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+#galaxyStage .flower-two {
+  left: 65% !important;
+  top: -15% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+#galaxyStage .flower-two img {
+  width: 300px !important;
+  height: 300px !important;
+  object-fit: contain;
+}
+
+#galaxyStage .flower-three {
+  left: 65% !important;
+  top: 34% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+#galaxyStage .flower-three img {
+  width: 300px !important;
+  height: 200px !important;
+  object-fit: contain;
+}
+
+#galaxyStage .flower-four {
+  left: -5% !important;
+  top: 70% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+#galaxyStage .flower-four img {
+  width: 400px !important;
+  height: 400px !important;
+  object-fit: contain;
+}
+
+#galaxyStage .flower-five {
+  left: -5% !important;
+  top: 30% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+#galaxyStage .flower-five img {
+  width: 300px !important;
+  height: 300px !important;
+  object-fit: contain;
+}
+
+#galaxyStage .flower-six {
+  left: 60% !important;
+  top: 88% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+#galaxyStage .flower-six img {
+  width: 300px;
+  height: 180px;
+  object-fit: contain;
+}
+
+/*  MAGA FLOATING MESSAGES */
+
+.orbit-message {
+  position: absolute;
+  z-index: 2;
+  max-width: 180px;
+  color: #c5efff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(12px, 2vw, 17px);
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 0 8px #31aaff,
+    0 0 18px #1468ff;
+  animation: messageFloat 6s ease-in-out infinite;
+}
+
+.message-one {
+  top: 5%;
+  left: 28%;
+}
+
+.message-two {
+  top: 27%;
+  right: 4%;
+  animation-delay: -2s;
+}
+
+.message-three {
+  left: 4%;
+  top: 29%;
+  animation-delay: -3s;
+}
+
+.message-four {
+  right: 10%;
+  bottom: 24%;
+  animation-delay: -1s;
+}
+
+.message-five {
+  left: 10%;
+  bottom: 20%;
+  animation-delay: -4s;
+}
+
+.message-six {
+  right: 24%;
+  top: 5%;
+  animation-delay: -2.5s;
+}
+
+.message-seven {
+  left: 43%;
+  bottom: 5%;
+  animation-delay: -3.5s;
+}
+
+/*  LE LOVE LETTER SCREEN */
+
+#messagesScreen {
+  background:
+    radial-gradient(ellipse at center, #103365aa, transparent 65%);
+}
+
+.letter-card {
+  width: min(100%, 470px);
+  padding: clamp(25px, 6vw, 48px);
+  text-align: center;
+  background: #06152bdc;
+  border: 1px solid #5acfff55;
+  box-shadow:
+    0 0 50px #167eff20,
+    inset 0 0 35px #258cff10;
+  backdrop-filter: blur(12px);
+}
+
+.letter-heart {
+  margin: 24px 0 12px;
+  font-size: 48px;
+  filter: drop-shadow(0 0 18px #2e94ff);
+}
+
+.letter-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 6vw, 43px);
+  font-weight: 400;
+  color: var(--ice);
+}
+
+.letter-text {
+  margin-top: 22px;
+  font-size: 13px;
+  line-height: 2;
+  color: #c4d6ec;
+}
+
+.letter-signature {
+  margin-top: 25px;
+  color: #83dcff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+}
+
+#backButton {
+  font-size: 9px;
+}
+
+/* ANIMATIONES */
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.09); }
+}
+
+@keyframes flowerFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-7deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(7deg);
+  }
+}
+
+@keyframes messageFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+/* TABLETS: 601px - 900px */
+
+@media screen and (min-width: 601px) and (max-width: 900px) {
+
+  #universe {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  #galaxyScreen {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #galaxyScreen .galaxy-heading {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  #galaxyStage {
+    width: 100%;
+    height: 58%;
+    top: 53%;
+  }
+
+  #galaxyStage .flower img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+  }
+
+  #galaxyStage .flower-two img {
+    width: 190px;
+    height: 200px;
+  }
+
+  #galaxyStage .flower-four img {
+    width: 195px;
+    height: 210px;
+  }
+
+  #galaxyStage .flower-five img {
+    width: 170px;
+    height: 185px;
+  }
+
+  .orbit-message {
+    max-width: 125px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  #galaxyScreen #memoriesButton {
+    position: absolute;
+    top: auto;
+    left: 50%;
+    right: auto;
+    bottom: 10%;
+    transform: translateX(-50%);
+    margin: 0;
+    height: auto;
+    min-height: 44px;
+    padding: 10px 18px;
+    white-space: nowrap;
+    z-index: 20;
+  }
+
+  #galaxyScreen .galaxy-footer {
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+  }
+
+  #messagesScreen {
+    overflow-y: auto;
+  }
+
+  .letter-card {
+    width: 90%;
+    max-width: 470px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  #universe {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  #galaxyScreen {
+    padding: 0;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  /* HEADING */
+
+  #galaxyScreen .galaxy-heading {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 15px;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .galaxy-heading .eyebrow {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .galaxy-heading h2 {
+    font-size: clamp(21px, 5.8vw, 27px);
+    line-height: 1.2;
+    margin-top: 9px;
+  }
+
+  /* GALAXY STAGE */
+
+  #galaxyStage {
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+  }
+
+  #heartCanvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* PICTURE DEFAULTS */
+
+  #galaxyStage .flower img {
+    display: block;
+    object-fit: contain;
+  }
+
+  /* PICTURE POSITIONS */
+
+  #galaxyStage .flower-one {
+    left: 1% !important;
+    top: 2% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .flower-two {
+    left: auto !important;
+    right: 0 !important;
+    top: -8% !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .flower-three {
+    left: auto !important;
+    right: 0 !important;
+    top: 38% !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .flower-four {
+    left: 8% !important;
+    top: 68% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .flower-five {
+    left: 0 !important;
+    top: 28% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .flower-six {
+    left: auto !important;
+    right: 5% !important;
+    top: 77% !important;
+    bottom: auto !important;
+  }
+
+  /* FLOATING MESSAGES */
+
+  .orbit-message {
+    position: absolute;
+    z-index: 5;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .message-one {
+    left: 30%;
+    top: 9%;
+    right: auto;
+    bottom: auto;
+  }
+
+  .message-six {
+    right: 28%;
+    top: 9%;
+    left: auto;
+    bottom: auto;
+  }
+
+  .message-three {
+    left: 24%;
+    top: 36%;
+    right: auto;
+    bottom: auto;
+  }
+
+  .message-two {
+    right: 23%;
+    top: 36%;
+    left: auto;
+    bottom: auto;
+  }
+
+  .message-five {
+    left: 24%;
+    bottom: 20%;
+    right: auto;
+    top: auto;
+  }
+
+  .message-four {
+    right: 22%;
+    bottom: 20%;
+    left: auto;
+    top: auto;
+  }
+
+  .message-seven {
+    left: 50%;
+    bottom: 4%;
+    right: auto;
+    top: auto;
+    width: 130px;
+    margin-left: -65px;
+  }
+
+  /* BUTTON */
+
+  #galaxyScreen #memoriesButton {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 10% !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: 90% !important;
+    height: auto !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    z-index: 20 !important;
+  }
+
+  #galaxyScreen #memoriesButton:hover {
+    transform: translateX(-50%) !important;
+  }
+
+  /* FOOTER */
+
+  #galaxyScreen .galaxy-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 100%;
+    text-align: center;
+    z-index: 20;
+  }
+
+  /* LOVE LETTER */
+
+  #messagesScreen {
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .letter-card {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 470px;
+    margin: auto 0;
+    border-radius: 10px;
+  }
+}
+
+
+
+/* IPHONE SE: 375 x 667 */
+
+@media screen and (max-width: 380px) {
+
+  /* GALAXY HEADING */
+  #galaxyScreen .galaxy-heading {
+    top: 11% !important;
+  }
+
+  /* GALAXY STAGE */
+  #galaxyStage {
+    top: 51% !important;
+    height: 49% !important;
+  }
+
+
+  /* FLOWER SIZES */
+
+  #galaxyStage .flower img {
+    width: 100px !important;
+    height: 110px !important;
+  }
+
+  #galaxyStage .flower-two img {
+    width: 125px !important;
+    height: 155px !important;
+  }
+
+  #galaxyStage .flower-three img {
+    width: 110px !important;
+    height: 95px !important;
+  }
+
+  #galaxyStage .flower-four img {
+    width: 135px !important;
+    height: 145px !important;
+  }
+
+  #galaxyStage .flower-five img {
+    width: 115px !important;
+    height: 125px !important;
+  }
+
+  #galaxyStage .flower-six img {
+    width: 105px !important;
+    height: 90px !important;
+  }
+
+
+  /* FLOWER POSITIONS */
+
+  #galaxyStage .flower-one {
+    top: -5% !important;
+    left: 0% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-two {
+    top: -10% !important;
+    right: -5% !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .flower-three {
+    top: 34% !important;
+    right: -5% !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .flower-four {
+    top: 70% !important;
+    left: -5% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-five {
+    top: 35% !important;
+    left: -5% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-six {
+    top: 80% !important;
+    right: 0% !important;
+    left: auto !important;
+  }
+
+
+  /* MESSAGE SIZE */
+
+  #galaxyStage .orbit-message {
+    max-width: 90px !important;
+    font-size: 9px !important;
+    line-height: 1.3 !important;
+  }
+
+
+  /* MESSAGE POSITIONS */
+
+  #galaxyStage .message-one {
+    top: 8% !important;
+    left: 28% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-two {
+    top: 27% !important;
+    right: 4% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-three {
+    top: 33% !important;
+    left: 4% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-four {
+    bottom: 27% !important;
+    right: 5% !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .message-five {
+    bottom: 22% !important;
+    left: 10% !important;
+    top: auto !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .message-six {
+    top: 0% !important;
+    right: 24% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-seven {
+    bottom: 3% !important;
+    left: 57% !important;
+    right: auto !important;
+    top: auto !important;
+    font-size: 9px !important;
+  }
+
+
+  /* BUTTON */
+
+  #galaxyScreen #memoriesButton {
+    bottom: 9% !important;
+    padding: 9px 13px !important;
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
+  }
+
+
+  /* FOOTER */
+
+  #galaxyScreen .galaxy-footer {
+    font-size: 6px !important;
+    letter-spacing: 1px !important;
+  }
+
+
+  /* LETTER */
+
+  .letter-card {
+    padding: 20px 16px !important;
+  }
+
+  .letter-text {
+    font-size: 10px !important;
+    line-height: 1.0 !important;
+  }
+}
+
+
+
+/* IPHONE 16: 393 x 852*/
+
+@media screen and (min-width: 381px) and (max-width: 414px) {
+
+  /* GALAXY HEADING */
+  #galaxyScreen .galaxy-heading {
+    top: 15% !important;
+  }
+
+  /* GALAXY STAGE */
+  #galaxyStage {
+    top: 52% !important;
+    height: 54% !important;
+  }
+
+
+  /* FLOWER SIZES */
+
+  #galaxyStage .flower img {
+    width: 115px !important;
+    height: 125px !important;
+  }
+
+  #galaxyStage .flower-two img {
+    width: 145px !important;
+    height: 165px !important;
+  }
+
+  #galaxyStage .flower-three img {
+    width: 125px !important;
+    height: 110px !important;
+  }
+
+  #galaxyStage .flower-four img {
+    width: 155px !important;
+    height: 165px !important;
+  }
+
+  #galaxyStage .flower-five img {
+    width: 135px !important;
+    height: 145px !important;
+  }
+
+  #galaxyStage .flower-six img {
+    width: 125px !important;
+    height: 105px !important;
+  }
+
+
+  /* FLOWER POSITIONS */
+
+  #galaxyStage .flower-one {
+    top: -5% !important;
+    left: 0% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-two {
+    top: -10% !important;
+    right: -5% !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .flower-three {
+    top: 34% !important;
+    right: -5% !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .flower-four {
+    top: 70% !important;
+    left: -5% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-five {
+    top: 35% !important;
+    left: -5% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-six {
+    top: 80% !important;
+    right: 0% !important;
+    left: auto !important;
+  }
+
+
+  /* MESSAGE SIZE */
+
+  #galaxyStage .orbit-message {
+    max-width: 105px !important;
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+  }
+
+
+  /* MESSAGE POSITIONS */
+
+  #galaxyStage .message-one {
+    top: 8% !important;
+    left: 28% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-two {
+    top: 27% !important;
+    right: 4% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-three {
+    top: 33% !important;
+    left: 4% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-four {
+    bottom: 25% !important;
+    right: 5% !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .message-five {
+    bottom: 25% !important;
+    left: 10% !important;
+    top: auto !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .message-six {
+    top: 0% !important;
+    right: 24% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-seven {
+    bottom: 3% !important;
+    left: 57% !important;
+    right: auto !important;
+    top: auto !important;
+    font-size: 10px !important;
+  }
+
+
+  /* BUTTON */
+
+  #galaxyScreen #memoriesButton {
+    bottom: 9% !important;
+    padding: 10px 15px !important;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+  }
+
+
+  /* FOOTER */
+
+  #galaxyScreen .galaxy-footer {
+    font-size: 7px !important;
+    letter-spacing: 1px !important;
+  }
+
+
+  /* LETTER */
+
+  .letter-card {
+    padding: 23px 18px !important;
+  }
+
+  .letter-text {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+  }
+}
+
+
+
+/*IPHONE 16 PRO MAX: 440 x 995*/
+
+@media screen and (min-width: 415px) and (max-width: 600px) {
+
+  /* GALAXY HEADING */
+  #galaxyScreen .galaxy-heading {
+    top: 17% !important;
+  }
+
+  /* GALAXY STAGE */
+  #galaxyStage {
+    top: 53% !important;
+    height: 58% !important;
+  }
+
+
+  /* FLOWER SIZES */
+
+  #galaxyStage .flower img {
+    width: 130px !important;
+    height: 140px !important;
+  }
+
+  #galaxyStage .flower-two img {
+    width: 165px !important;
+    height: 185px !important;
+  }
+
+  #galaxyStage .flower-three img {
+    width: 145px !important;
+    height: 125px !important;
+  }
+
+  #galaxyStage .flower-four img {
+    width: 175px !important;
+    height: 185px !important;
+  }
+
+  #galaxyStage .flower-five img {
+    width: 155px !important;
+    height: 165px !important;
+  }
+
+  #galaxyStage .flower-six img {
+    width: 145px !important;
+    height: 120px !important;
+  }
+
+
+  /* FLOWER POSITIONS */
+
+  #galaxyStage .flower-one {
+    top: -5% !important;
+    left: 0% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-two {
+    top: -10% !important;
+    right: -5% !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .flower-three {
+    top: 34% !important;
+    right: -5% !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .flower-four {
+    top: 70% !important;
+    left: -5% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-five {
+    top: 35% !important;
+    left: -5% !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .flower-six {
+    top: 80% !important;
+    right: 0% !important;
+    left: auto !important;
+  }
+
+
+  /* MESSAGE SIZE */
+
+  #galaxyStage .orbit-message {
+    max-width: 120px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+
+  /* MESSAGE POSITIONS */
+
+  #galaxyStage .message-one {
+    top: 8% !important;
+    left: 28% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-two {
+    top: 27% !important;
+    right: 4% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-three {
+    top: 33% !important;
+    left: 4% !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-four {
+    bottom: 25% !important;
+    right: 5% !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  #galaxyStage .message-five {
+    bottom: 25% !important;
+    left: 10% !important;
+    top: auto !important;
+    right: auto !important;
+  }
+
+  #galaxyStage .message-six {
+    top: 0% !important;
+    right: 24% !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+  #galaxyStage .message-seven {
+    bottom: 3% !important;
+    left: 57% !important;
+    right: auto !important;
+    top: auto !important;
+    font-size: 11px !important;
+  }
+
+
+  /* BUTTON */
+
+  #galaxyScreen #memoriesButton {
+    bottom: 9% !important;
+    padding: 11px 17px !important;
+    font-size: 11px !important;
+    letter-spacing: 1.2px !important;
+  }
+
+
+  /* FOOTER */
+
+  #galaxyScreen .galaxy-footer {
+    font-size: 8px !important;
+    letter-spacing: 1.2px !important;
+  }
+
+
+  /* LETTER */
+
+  .letter-card {
+    padding: 26px 20px !important;
+  }
+
+  .letter-text {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+.letter-text p {
+  margin-bottom: 18px;
+}
+
+.letter-text p:last-child {
+  margin-bottom: 0;
+}
